@@ -32,9 +32,9 @@ public class AuthController {
 		String token = jwtTokenProvider.generateToken(authentication);
 		return ResponseEntity.ok(new JWTAuthResponse(token));
 	}
+	
 	@GetMapping("/msg")
-	public String getMsg()
-	{
+	public String getMsg(){
 		return "Hello";
 	}
 }
