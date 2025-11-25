@@ -27,12 +27,12 @@ jobs:
       # Step 4: Auto-generate Dockerfile
       - name: Create Dockerfile
         run: |
-          echo 'FROM openjdk:17-jdk-slim' > Dockerfile
+          echo 'FROM eclipse-temurin:17-jdk' > Dockerfile
           echo 'WORKDIR /app' >> Dockerfile
           echo 'COPY StudentManagement/target/*.jar app.jar' >> Dockerfile
           echo 'EXPOSE 8080' >> Dockerfile
-          echo 'ENTRYPOINT ["java", "-jar", "app.jar"]' >> Dockerfile
-
+          echo 'ENTRYPOINT ["java", "-jar", "app.jar"]' >> Dockerfile
+          
       # Step 5: Login to Docker Hub
       - name: Login to DockerHub
         uses: docker/login-action@v2
