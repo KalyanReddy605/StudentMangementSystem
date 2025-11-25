@@ -1,7 +1,5 @@
 package com.example.springboot.Dto;
 
-import lombok.Getter;
-
 
 public class JWTAuthResponse {
 	
