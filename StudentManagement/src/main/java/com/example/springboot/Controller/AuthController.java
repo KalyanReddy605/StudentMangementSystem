@@ -10,25 +10,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.springboot.Dto.JWTAuthResponse;
 import com.example.springboot.Dto.LoginDto;
 import com.example.springboot.Security.JwtTokenProvider;
 
-
 @RestController
 @RequestMapping("/Auth")
 public class AuthController {
-	
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
-	
+
 	@PostMapping("/login")
-	public ResponseEntity<JWTAuthResponse> loginUser(@RequestBody LoginDto loginDto){
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
+	public ResponseEntity<JWTAuthResponse> loginUser(@RequestBody LoginDto loginDto) {
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String token = jwtTokenProvider.generateToken(authentication);
 		return ResponseEntity.ok(new JWTAuthResponse(token));
