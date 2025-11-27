@@ -30,7 +30,7 @@ jobs:
           echo 'FROM eclipse-temurin:17-jdk' > Dockerfile
           echo 'WORKDIR /app' >> Dockerfile
           echo 'COPY StudentManagement/target/*.jar app.jar' >> Dockerfile
-          echo 'EXPOSE 8080' >> Dockerfile
+          echo 'EXPOSE 8086' >> Dockerfile
           echo 'ENTRYPOINT ["java", "-jar", "app.jar"]' >> Dockerfile
 
       # Login to Docker Hub
