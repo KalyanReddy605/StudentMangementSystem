@@ -58,18 +58,21 @@ jobs:
       - name: SSH into EC2 & deploy
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          
-          # Pull latest image
-          docker pull ${{ secrets.DOCKER_USERNAME }}/student-management:latest
-          
-          # Stop old container if running
+
+          # Stop and remove running container
           docker stop student || true
           docker rm student || true
-          
+
+          # Remove old images BEFORE pulling the new one
+          docker image prune -a -f
+
+          # Pull latest image
+          docker pull ${{ secrets.DOCKER_USERNAME }}/student-management:latest
+
           # Run new container
           docker run -d \
             --name student \
             -p 8086:8086 \
             ${{ secrets.DOCKER_USERNAME }}/student-management:latest
-          
+
           EOF
