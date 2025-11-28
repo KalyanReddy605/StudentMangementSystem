@@ -41,6 +41,11 @@ public class AuthController {
 	public String getMsg(){
 		return "Hello world";
 	}
+	
+	@GetMapping("/java")
+	public String getMethod() {
+		return "Java is simple";
+	}
 
 	
 
